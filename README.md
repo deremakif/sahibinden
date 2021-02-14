@@ -1,12 +1,12 @@
-#Sahibinden
+# Sahibinden
 
 This app provides web-scraping from *sahibinden.com* using Selenium package. 
 
-##Getting Started
+## Getting Started
 
 Clone this repo.
 
-##Installation
+## Installation
 
 ```
 dotnet restore
