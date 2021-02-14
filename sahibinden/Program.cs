@@ -1,22 +1,26 @@
 ﻿using System;
+using System.IO;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-
-using System.IO;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Safari;
 
 namespace sahibinden
 {
+
     public class Program
     {
-        public static void yaz(string a)
+        /// <summary>
+        /// Writes The Given Value
+        /// <param name="value">Value</param> 
+        /// </summary>
+        public static void writeToDoc(string value)
         {
             // masaüstünde bir txt dosyası oluşturabilirsin.
             string path = @"/users/deremakif/Desktop/sahibinden.txt";
-            using (var tw = new StreamWriter(path, true))
+            using (var sw = new StreamWriter(path, true))
             {
-                tw.WriteLine(a);
+                sw.WriteLine(value);
             }
 
         }
@@ -34,10 +38,10 @@ namespace sahibinden
             //options.AddArgument("--disable-infobars");
             //options.AddArgument("--disable-extensions");
             //options.AddArgument("user-agent=Mozilla/5.0 (Windows NT 10.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36");
-           
 
-            IWebDriver driver = new FirefoxDriver(); // @"/users/deremakif/Downloads/", options
-            //IWebDriver driver = new ChromeDriver(); // @"/users/deremakif/Downloads/", options
+
+            //IWebDriver driver = new FirefoxDriver(); // @"/users/deremakif/Downloads/", options
+            IWebDriver driver = new ChromeDriver(); // @"/users/deremakif/Downloads/", options
 
             for (int i = 1; i < 21; i++)
             {
@@ -51,52 +55,52 @@ namespace sahibinden
                 {
                     try
                     {
-                        yaz("------------------------------------------ " + (((i - 1) * 50) + j));
+                        writeToDoc("------------------------------------------ " + (((i - 1) * 50) + j));
 
                         // marka
-                        yaz("marka : " + driver.FindElement(By.XPath("/html/body/div[4]/div[4]/form/div/div[3]/table/tbody/tr[" + j + "]/td[2]")).Text);
+                        writeToDoc("marka : " + driver.FindElement(By.XPath("/html/body/div[4]/div[4]/form/div/div[3]/table/tbody/tr[" + j + "]/td[2]")).Text);
 
                         // seri
-                        yaz("seri : " + driver.FindElement(By.XPath("/html/body/div[4]/div[4]/form/div/div[3]/table/tbody/tr[" + j + "]/td[3]")).Text);
+                        writeToDoc("seri : " + driver.FindElement(By.XPath("/html/body/div[4]/div[4]/form/div/div[3]/table/tbody/tr[" + j + "]/td[3]")).Text);
 
                         // model
-                        yaz("model : " + driver.FindElement(By.XPath("/html/body/div[4]/div[4]/form/div/div[3]/table/tbody/tr[" + j + "]/td[4]")).Text);
+                        writeToDoc("model : " + driver.FindElement(By.XPath("/html/body/div[4]/div[4]/form/div/div[3]/table/tbody/tr[" + j + "]/td[4]")).Text);
 
                         // yil
-                        yaz("yil : " + driver.FindElement(By.XPath("/html/body/div[4]/div[4]/form/div/div[3]/table/tbody/tr[" + j + "]/td[6]")).Text);
+                        writeToDoc("yil : " + driver.FindElement(By.XPath("/html/body/div[4]/div[4]/form/div/div[3]/table/tbody/tr[" + j + "]/td[6]")).Text);
 
                         // km
-                        yaz("km : " + driver.FindElement(By.XPath("/html/body/div[4]/div[4]/form/div/div[3]/table/tbody/tr[" + j + "]/td[7]")).Text);
+                        writeToDoc("km : " + driver.FindElement(By.XPath("/html/body/div[4]/div[4]/form/div/div[3]/table/tbody/tr[" + j + "]/td[7]")).Text);
 
                         // kasa tipi
-                        yaz("kasa tipi : " + driver.FindElement(By.XPath("/html/body/div[4]/div[4]/form/div/div[3]/table/tbody/tr[" + j + "]/td[8]")).Text);
+                        writeToDoc("kasa tipi : " + driver.FindElement(By.XPath("/html/body/div[4]/div[4]/form/div/div[3]/table/tbody/tr[" + j + "]/td[8]")).Text);
 
                         // fiyat
-                        yaz("fiyat : " + driver.FindElement(By.XPath("/html/body/div[4]/div[4]/form/div/div[3]/table/tbody/tr[" + j + "]/td[9]")).Text);
+                        writeToDoc("fiyat : " + driver.FindElement(By.XPath("/html/body/div[4]/div[4]/form/div/div[3]/table/tbody/tr[" + j + "]/td[9]")).Text);
 
                         // ilan tarihi  + driver.FindElement(By.XPath("/html/body/div[4]/div[4]/form/div/div[3]/table/tbody/tr[" + j + "]/td[10]")).Text
-                        yaz("ilan tarihi : " );
+                        writeToDoc("ilan tarihi : ");
 
                         // il ilce
                         string konum = driver.FindElement(By.XPath("/html/body/div[4]/div[4]/form/div/div[3]/table/tbody/tr[" + j + "]/td[11]")).Text;
-                        if(konum.Contains("\n"))
+                        if (konum.Contains("\n"))
                         {
-                            konum = konum.Replace("\n", " - " );
+                            konum = konum.Replace("\n", " - ");
                         }
-                        yaz("il ilce : " + konum);
+                        writeToDoc("il ilce : " + konum);
 
                     }
                     catch (Exception)
                     {
-                        yaz("marka : " + (((i - 1) * 50) + j) + " listede bulamadı");
-                        yaz("seri : " + (((i - 1) * 50) + j) + " listede bulamadı");
-                        yaz("model : " + (((i - 1) * 50) + j) + " listede bulamadı");
-                        yaz("yil : " + (((i - 1) * 50) + j) + " listede bulamadı");
-                        yaz("km : " + (((i - 1) * 50) + j) + " listede bulamadı");
-                        yaz("kasa tipi : " + (((i - 1) * 50) + j) + " listede bulamadı");
-                        yaz("fiyat : " + (((i - 1) * 50) + j) + " listede bulamadı");
-                        yaz("ilan tarihi : " + (((i - 1) * 50) + j) + " listede bulamadı");
-                        yaz("il ilce : " + (((i - 1) * 50) + j) + " listede bulamadı");
+                        writeToDoc("marka : " + (((i - 1) * 50) + j) + " listede bulamadı");
+                        writeToDoc("seri : " + (((i - 1) * 50) + j) + " listede bulamadı");
+                        writeToDoc("model : " + (((i - 1) * 50) + j) + " listede bulamadı");
+                        writeToDoc("yil : " + (((i - 1) * 50) + j) + " listede bulamadı");
+                        writeToDoc("km : " + (((i - 1) * 50) + j) + " listede bulamadı");
+                        writeToDoc("kasa tipi : " + (((i - 1) * 50) + j) + " listede bulamadı");
+                        writeToDoc("fiyat : " + (((i - 1) * 50) + j) + " listede bulamadı");
+                        writeToDoc("ilan tarihi : " + (((i - 1) * 50) + j) + " listede bulamadı");
+                        writeToDoc("il ilce : " + (((i - 1) * 50) + j) + " listede bulamadı");
 
                     }
 
@@ -114,21 +118,21 @@ namespace sahibinden
                         // satici :
                         try
                         {
-                            yaz("satici : " + driver.FindElement(By.XPath("/html/body/div[4]/div[4]/div[1]/div[2]/div[3]/div[1]/div/div[1]/h5")).Text);
+                            writeToDoc("satici : " + driver.FindElement(By.XPath("/html/body/div[4]/div[4]/div[1]/div[2]/div[3]/div[1]/div/div[1]/h5")).Text);
                         }
                         catch (Exception)
                         {
-                            yaz("satici : " + (((i - 1) * 50) + j) + " detayına giremedi");
+                            writeToDoc("satici : " + (((i - 1) * 50) + j) + " detayına giremedi");
                         }
 
                         // telefon
                         try
                         {
-                            yaz("telefon : " + driver.FindElement(By.XPath("/html/body/div[4]/div[4]/div[1]/div[2]/div[3]/div[1]/div/ul/li/span[1]")).Text);
+                            writeToDoc("telefon : " + driver.FindElement(By.XPath("/html/body/div[4]/div[4]/div[1]/div[2]/div[3]/div[1]/div/ul/li/span[1]")).Text);
                         }
                         catch (Exception)
                         {
-                            yaz("telefon : " + (((i - 1) * 50) + j) + " detayına giremedi");
+                            writeToDoc("telefon : " + (((i - 1) * 50) + j) + " detayına giremedi");
                         }
 
                     }
@@ -136,8 +140,8 @@ namespace sahibinden
                     {
                         Console.WriteLine("firma detayına giremedi " + ex + (((i - 1) * 50) + j));
 
-                        yaz("satici : " + (((i - 1) * 50) + j) + " detayına giremedi");
-                        yaz("telefon : " + (((i - 1) * 50) + j) + " detayına giremedi");
+                        writeToDoc("satici : " + (((i - 1) * 50) + j) + " detayına giremedi");
+                        writeToDoc("telefon : " + (((i - 1) * 50) + j) + " detayına giremedi");
                     }
 
                     // Listeye geri döner.
@@ -151,7 +155,8 @@ namespace sahibinden
 
         }
 
-        public bool check_exists_by_xpath(string xpath)
+
+        public bool checkExistsByXPath(string xpath)
         {
             try
             {
